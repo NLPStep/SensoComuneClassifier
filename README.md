@@ -1,14 +1,18 @@
-# NLPServer
+# SensoComuneClassifier
 
-NLPServer implements a server listening http requests on different routes, to query different modules of the [KotlinNLP](http://kotlinnlp.com/ "KotlinNLP") library.
+SensoComuneClassifier is a classifier of glosses based on the SensoComune ontology categories.
 
-NLPServer is part of [KotlinNLP](http://kotlinnlp.com/ "KotlinNLP").
+It is implemented as a server application that uses the [HANClassifier](https://github.com/KotlinNLP/HANClassifier "HANClassifier on GitHub") 
+of the [KotlinNLP](http://kotlinnlp.com/ "KotlinNLP") library.
+
+SensoComuneClassifier is part of [NLPStep](http://nlpstep.com/ "NLPStep").
 
 
 ## Getting Started
 
 Run the server simply passing configuration parameters by command line to the
-[RunServerKt](https://???/ "RunServerKt") script.
+[RunServerKt](https://github.com/NLPStep/SensoComuneClassifier/blob/master/src/main/kotlin/com/nlpstep/sensocomuneclassifier/RunServer.kt "RunServerKt") 
+script.
 
 
 ### Command line arguments
@@ -18,9 +22,8 @@ This is the help command output:
 required arguments:
   -p PORT,                     the port listened from the server
   -t TOKENIZER_MODEL,          the filename of the model of the neural tokenizer
-  -l LANGUAGE_DETECTOR_MODEL,  the filename of the model of the language detector
-  -f FREQUENCY_DICTIONARY      the filename of the frequency dictionary used by the 
-                               language detector
+  -m HAN_CLASSIFIER_MODEL,     the filename of the model of the HAN classifier
+  -c CLASSES_FILENAME          the filename of the possible classes (one per line)
 ```
 
 
@@ -33,4 +36,4 @@ This software is released under the terms of the
 ## Contributions
 
 We greatly appreciate any bug reports and contributions, which can be made by filing an issue or making a pull 
-request through the [github page](https://github.com/KotlinNLP/NLPServer "NLPServer on GitHub").
+request through the [github page](https://github.com/NLPStep/SensoComuneClassifier "SensoComuneClassifier on GitHub").
