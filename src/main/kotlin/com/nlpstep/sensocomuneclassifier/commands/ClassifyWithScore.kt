@@ -67,7 +67,7 @@ class ClassifyWithScore(
     val nestedStrings: List<List<String>> = sentences.toNestedStrings()
 
     val output: DenseNDArray = this.classifier.classify(nestedStrings)
-    val importanceScores = this.classifier.encoder.getInputImportanceScores(copy = false) as HierarchyGroup
+    val importanceScores = this.classifier.encoder.getInputImportanceScores() as HierarchyGroup
 
     return json {
       obj(
