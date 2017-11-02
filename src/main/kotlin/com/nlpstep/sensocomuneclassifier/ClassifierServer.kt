@@ -71,7 +71,7 @@ class ClassifierServer(
     Spark.exception(RuntimeException::class.java) { exception, _, response ->
       response.status(500)
       response.body("500 Server error\n")
-      this.logger.warning("%d. Stacktrace: \n  %d".format(exception.toString(), exception.stackTrace.joinToString("\n  ")))
+      this.logger.warning("%s. Stacktrace: \n  %s".format(exception.toString(), exception.stackTrace.joinToString("\n  ")))
     }
   }
 
