@@ -11,6 +11,7 @@ import com.kotlinnlp.hanclassifier.HANClassifier
 import com.kotlinnlp.neuraltokenizer.NeuralTokenizer
 import com.kotlinnlp.neuraltokenizer.Sentence
 import com.kotlinnlp.simplednn.simplemath.ndarray.dense.DenseNDArray
+import toNestedStrings
 
 /**
  * The command executed on the route '/classify'.
@@ -44,15 +45,5 @@ class Classify(
     val output: DenseNDArray = this.classifier.classify(sentences.toNestedStrings())
 
     return this.classes[output.argMaxIndex()]
-  }
-
-  /**
-   * Convert a [List] of [Sentence]s to nested [String]s (forms).
-   *
-   * @return a list of list of Strings
-   */
-  private fun List<Sentence>.toNestedStrings(): List<List<String>> {
-
-    return this.map { it.tokens.map { it.form } }
   }
 }
