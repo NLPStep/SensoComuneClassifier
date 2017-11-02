@@ -12,6 +12,7 @@ import com.kotlinnlp.hanclassifier.HANClassifierModel
 import com.kotlinnlp.neuraltokenizer.NeuralTokenizer
 import com.kotlinnlp.neuraltokenizer.NeuralTokenizerModel
 import com.nlpstep.sensocomuneclassifier.commands.Classify
+import com.nlpstep.sensocomuneclassifier.commands.ClassifyWithScore
 import com.nlpstep.sensocomuneclassifier.commands.exceptions.MissingParameters
 import spark.Request
 import spark.Spark
@@ -48,6 +49,14 @@ class ClassifierServer(
     classes = this.loadClasses(classesFilename))
 
   /**
+   * The handler of the ClassifyWithScore command.
+   */
+  private val classifyWithScore = ClassifyWithScore(
+    tokenizer = this.buildTokenizer(tokenizerModelFilename),
+    classifier = this.buildHANClassifier(hanClassifierModelFilename),
+    classes = this.loadClasses(classesFilename))
+
+  /**
    * Initialize Spark: set port and exceptions handling.
    */
   init {
@@ -73,6 +82,10 @@ class ClassifierServer(
 
     Spark.path("/classify") {
       this.classifyRoute()
+    }
+
+    Spark.path("/classify-with-score") {
+      this.classifyWithScoreRoute()
     }
 
     this.logger.info("SensoComune Classifier Server running on 'localhost:%d'\n".format(Spark.port()))
@@ -129,6 +142,23 @@ class ClassifierServer(
 
     Spark.post("") { request, _ ->
       this.classify(gloss = request.body())
+    }
+  }
+
+  /**
+   * Define the '/classify-with-score' route.
+   */
+  private fun classifyWithScoreRoute() {
+
+    Spark.get("") { request, _ ->
+
+      request.checkRequiredParams(requiredParams = listOf("gloss"))
+
+      this.classifyWithScore(gloss = request.queryParams("gloss"))
+    }
+
+    Spark.post("") { request, _ ->
+      this.classifyWithScore(gloss = request.body())
     }
   }
 
