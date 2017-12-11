@@ -7,10 +7,12 @@
 
 package com.nlpstep.sensocomuneclassifier
 
+import com.xenomachina.argparser.mainBody
+
 /**
  * Run the SensoComune Classifier Server.
  */
-fun main(args: Array<String>) {
+fun main(args: Array<String>) = mainBody {
 
   val parsedArgs = CommandLineArguments(args)
 
