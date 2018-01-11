@@ -41,7 +41,7 @@ class Classify(
    */
   operator fun invoke(gloss: String): String {
 
-    val sentences: List<Sentence> = this.tokenizer.tokenize(gloss)
+    val sentences: ArrayList<Sentence> = this.tokenizer.tokenize(gloss)
     val output: DenseNDArray = this.classifier.classify(sentences.toNestedStrings())
 
     return this.classes[output.argMaxIndex()]
